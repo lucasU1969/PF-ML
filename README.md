@@ -13,6 +13,6 @@
 #### To-Do
 1. Hacer el código para preprocesar una muestra nueva.
 2. Probar la MLP con distintos parámetros.
-3. Probar los modelos baseline para distintos parámetros y distontas combinaciones de features.
+3. Probar los modelos baseline para distintos parámetros y distintas combinaciones de features.
 4. Interfaz de usuario.
 5. Ejercicio extra.
