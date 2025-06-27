@@ -11,8 +11,11 @@
 
 
 #### To-Do
-1. Hacer el código para preprocesar una muestra nueva.
-2. Probar la MLP con distintos parámetros.
-3. Probar los modelos baseline para distintos parámetros y distontas combinaciones de features.
-4. Interfaz de usuario.
-5. Ejercicio extra.
+1. Hacer una exploración de datos para cada columna para ver los outliers.
+2. Hacer el código para preprocesar una muestra nueva.
+3. Probar la MLP con distintos parámetros.
+4. Probar los modelos baseline para distintos parámetros y distintas combinaciones de features.
+5. Interfaz de usuario.
+6. Ejercicio extra.
+7. Informe
+8. Poster
