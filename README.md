@@ -11,11 +11,12 @@
 
 
 #### To-Do
-1. Hacer una exploración de datos para cada columna para ver los outliers.
-2. Hacer el código para preprocesar una muestra nueva.
-3. Probar la MLP con distintos parámetros.
-4. Probar los modelos baseline para distintos parámetros y distintas combinaciones de features.
-5. Interfaz de usuario.
-6. Ejercicio extra.
-7. Informe
-8. Poster
+- Hacer una exploración de datos para cada columna para ver los outliers.
+- Probar el catboot 
+- Hacer el código para preprocesar una muestra nueva.
+- Probar la MLP con distintos parámetros.
+- Probar los modelos baseline para distintos parámetros y distintas combinaciones de features.
+- Interfaz de usuario.
+- Ejercicio extra.
+- Informe
+- Poster
