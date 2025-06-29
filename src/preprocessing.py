@@ -8,10 +8,6 @@ class Preprocessor:
 
     def __init__(self, raw_train_df: pd.DataFrame):
         """
-        Initializes the Preprocessor with the raw training DataFrame.
-
-        Parameters:
-            raw_train_df (pd.DataFrame): The raw training DataFrame to be preprocessed.
         """
         self.train_df = raw_train_df.drop(columns=['Unnamed: 0']).copy()
 
@@ -29,32 +25,18 @@ class Preprocessor:
 
     def marca(self, test_df:pd.DataFrame, known_brands: list[str]=KNOWN_BRANDS) -> pd.DataFrame: 
         """
-        Cleans the 'Marca' column of the training DataFrame.
-        Creates a new one-hot column for each known brand.
-
-        Parameters:
-            known_brands (list[str]): List of known brands to create one-hot columns.
         """
         min_levenshtein_distance_one_hot(test_df, 'Marca', known_brands)
         return test_df
     
     def modelo(self, test_df:pd.DataFrame,  known_models: list[str]=KNOWN_MODELS) -> pd.DataFrame:
         """
-        Cleans the 'Modelo' column of the training DataFrame.
-        Creates a new one-hot column for each known brand.
-
-        Returns:
-            pd.DataFrame: The DataFrame with cleaned 'Modelo' column.
         """
         min_levenshtein_distance_one_hot(test_df, 'Modelo', known_models)
         return test_df
     
     def año(self, test_df:pd.DataFrame) -> pd.DataFrame:
         """
-        Cleans the 'Año' column of the training DataFrame.
-        Replaces NaN values and years greater than 2025 with the median year of the column in the training set.
-        Returns:
-            pd.DataFrame: The DataFrame with cleaned 'Año' column.
         """
         median_year = self.train_df['Año'].median()
         test_df['Año'] = test_df['Año'].apply(
@@ -67,37 +49,18 @@ class Preprocessor:
     
     def color(self, test_df:pd.DataFrame, known_colors: list[str]=KNOWN_COLORS) -> pd.DataFrame:
         """
-        Cleans the 'Color' column of the training DataFrame.
-        Creates a new one-hot column for each known color.
-
-        Parameters:
-            known_colors (list[str]): List of known colors to create one-hot columns.
-
-        Returns:
-            pd.DataFrame: The DataFrame with cleaned 'Color' column.
         """
         min_levenshtein_distance_one_hot(test_df, 'Color', known_colors)
         return test_df
     
     def tipo_de_combustible(self, test_df:pd.DataFrame, known_fuels: list[str]=KNOWN_FUELS) -> pd.DataFrame:
         """
-        Cleans the 'Tipo de combustible' column of the training DataFrame.
-        Creates a new one-hot column for each known fuel type.
-
-        Parameters:
-            known_fuels (list[str]): List of known fuel types to create one-hot columns.
-        Returns:
-            pd.DataFrame: The DataFrame with cleaned 'Tipo de combustible' column.
         """
         min_levenshtein_distance_one_hot(test_df, 'Tipo de combustible', known_fuels)
         return test_df
     
     def puertas(self, test_df:pd.DataFrame) -> pd.DataFrame:
         """
-        Cleans the 'Puertas' column of the training DataFrame.
-        Replaces values outside the interval [2, 10] with NaN and fills NaN values with the mean number of doors per model.
-        Returns:
-            pd.DataFrame: The DataFrame with cleaned 'Puertas' column.
         """
         test_df['Puertas'] = test_df['Puertas'].apply(
             lambda x: x if 2 <= x <= 10 else pd.NA
@@ -110,24 +73,12 @@ class Preprocessor:
 
     def transmision(self, test_df:pd.DataFrame, known_transmissions: list[str]=KNOWN_TRANSMISSIONS) -> pd.DataFrame:
         """
-        Cleans the 'Transmisión' column of the training DataFrame.
-        Creates a new one-hot column for each known transmission type.
-
-        Parameters:
-            known_transmissions (list[str]): List of known transmission types to create one-hot columns.
-        Returns:
-            pd.DataFrame: The DataFrame with cleaned 'Transmisión' column.
         """
         min_levenshtein_distance_one_hot(test_df, 'Transmisión', known_transmissions)
         return test_df
     
     def motor(self, test_df:pd.DataFrame) -> pd.DataFrame: 
         """
-        Cleans the 'Motor' column of the training DataFrame.
-        Extracts the engine size in liters from the 'Motor' column and creates a new column 'LitrosMotor'.
-
-        Returns:
-            pd.DataFrame: The DataFrame with cleaned 'Motor' column and new 'LitrosMotor' column.
         """
         test_df['LitrosMotor'] = test_df['Motor'].apply(extract_l_motor)
 
@@ -153,20 +104,12 @@ class Preprocessor:
     
     def tipo_de_carroceria(self, test_df:pd.DataFrame) -> pd.DataFrame: 
         """
-        Drop the 'Tipo de carrocería' column from the training DataFrame.
-        Returns:
-            pd.DataFrame: The DataFrame with 'Tipo de carrocería' column dropped.
         """
         test_df.drop(columns=['Tipo de carrocería'], inplace=True)
         return test_df
     
     def con_camara_de_retroceso(self, test_df:pd.DataFrame) -> pd.DataFrame:
         """
-        Cleans the 'Con cámara de retroceso' column of the training DataFrame.
-        Replaces NaN values with the mean value of the column grouped by 'Modelo'.
-        If the mean is NaN, it fills with -1.
-        Returns:
-            pd.DataFrame: The DataFrame with cleaned 'Con cámara de retroceso' column.
         """
         camara_retroceso_mean_per_model = calcular_promedios_por_modelo(self.train_df)
         rellenar_nans_por_modelo(test_df, camara_retroceso_mean_per_model, feature='Con cámara de retroceso')
@@ -174,12 +117,6 @@ class Preprocessor:
 
     def kilometros(self, test_df:pd.DataFrame) -> pd.DataFrame:
         """
-        Cleans the 'Kilómetros' column of the training DataFrame.
-        Replaces NaN values with the median kilometers of the column in the training set.
-        Converts the column to float type after cleaning.
-
-        Returns:
-            pd.DataFrame: The DataFrame with cleaned 'Kilómetros' column.
         """
         test_df['Kilómetros'] = test_df['Kilómetros'].apply(clean_km_value)
         median_km = self.train_df['Kilómetros'].median()
@@ -197,28 +134,12 @@ class Preprocessor:
     
     def moneda(self, test_df:pd.DataFrame, known_currencies:list[str]=KNOWN_CURRENCIES) -> pd.DataFrame:
         """
-        Cleans the 'Moneda' column of the training DataFrame.
-        Creates a new one-hot column for each known currency.
-
-        Parameters:
-            known_currencies (list[str]): List of known currencies to create one-hot columns.
-
-        Returns:
-            pd.DataFrame: The DataFrame with cleaned 'Moneda' column.
         """
         min_levenshtein_distance_one_hot(test_df, 'Moneda', known_currencies)
         return test_df
     
     def descripcion(self, test_df:pd.DataFrame, drop:bool=True) -> pd.DataFrame:
         """
-        Cleans the 'Descripción' column of the training DataFrame.
-        Optionally drops the column.
-
-        Parameters:
-            drop (bool): Whether to drop the 'Descripción' column. Defaults to True.
-
-        Returns:
-            pd.DataFrame: The DataFrame with cleaned 'Descripción' column.
         """
         test_df['Caracteres_descripcion'] = test_df['Descripción'].apply(lambda x: len(str(x)))
         if drop:
@@ -227,27 +148,12 @@ class Preprocessor:
     
     def tipo_de_vendedor(self, test_df:pd.DataFrame, known_sellers:list[str]=KNOWN_SELLERS) -> pd.DataFrame:
         """
-        Cleans the 'Tipo de vendedor' column of the training DataFrame.
-        Creates a new one-hot column for each known seller type.
-
-        Parameters:
-            known_sellers (list[str]): List of known seller types to create one-hot columns.
-
-        Returns:
-            pd.DataFrame: The DataFrame with cleaned 'Tipo de vendedor' column.
         """
         min_levenshtein_distance_one_hot(test_df, 'Tipo de vendedor', known_sellers)
         return test_df
     
     def preprocess(self, test_df:pd.DataFrame) -> pd.DataFrame:
         """
-        Applies all preprocessing steps to the test DataFrame.
-
-        Parameters:
-            test_df (pd.DataFrame): The DataFrame to be preprocessed.
-
-        Returns:
-            pd.DataFrame: The preprocessed DataFrame.
         """
         methods:list[function] = [
             self.marca,
@@ -268,7 +174,7 @@ class Preprocessor:
             self.descripcion,
             self.tipo_de_vendedor
         ]
-        
+
         for method in methods:
             test_df = method(test_df)
 
