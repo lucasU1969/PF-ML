@@ -11,8 +11,8 @@
 
 
 #### To-Do
-- Probar el catboot 
-- Hacer el código para preprocesar una muestra nueva.
+- Probar combinaciones de hiperparámetros y features para catboot 
+- Testear el código para preprocesar una muestra nueva.
 - Probar la MLP con distintos parámetros.
 - Ejercicio extra.
 - Informe
