@@ -15,17 +15,17 @@ def min_levenshtein_distance_one_hot(df:pd.DataFrame, column_name:str, known_val
     Returns:
         pd.DataFrame: The DataFrame with one-hot encoded columns.
     """
-    for value in known_values:
-        df[value] = 0
-
-    for i, input_value in enumerate(df[column_name]):
+    one_hot_df = pd.DataFrame(0, index=df.index, columns=known_values)
+    for index, row in df.iterrows():
+        input_value = row[column_name]
         dists = [levenshtein_distance(str(input_value).lower(), value.lower()) for value in known_values]
         idx_min = np.argmin(dists)
         matched_value = known_values[idx_min]
-        df.at[i, matched_value] = 1
+        one_hot_df.loc[index, matched_value] = 1
+    df_processed = df.drop(columns=[column_name])
+    df_result = pd.concat([df_processed, one_hot_df], axis=1)
 
-    df.drop(columns=[column_name], inplace=True)
-    return df
+    return df_result
 
 def extract_l_motor(motor_str):
     """
