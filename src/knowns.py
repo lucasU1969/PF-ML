@@ -31,8 +31,8 @@ KNOWN_MODELS = [
 KNOWN_COLORS = [
     'Blanco', 'Negro', 'Gris', 'Plata', 'Acero', 'Azul', 'Gray', 'Rojo', 
     'Granito', 'Beige', 'Verde', 'Marrón', 'Amarillo', 'Violeta', 'Naranja', 
-    'Dorado', 'Grafito', 'White', 'Cobre', 'Black', 'Rosa', 'Celeste', 'Morado', 
-    'Plateado', 'Celeste', 'Beige', 'blue', 'Bordó', 'Celeste', 'Otro']
+    'Dorado', 'Grafito', 'White', 'Cobre', 'Black', 'Rosa', 'Morado', 
+    'Plateado', 'blue', 'Bordó', 'Otro']
 
 KNOWN_CURRENCIES = ['$', 'US$']
 
