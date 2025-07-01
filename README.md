@@ -11,9 +11,7 @@
 
 
 #### To-Do
-- Probar combinaciones de hiperparámetros y features para catboot 
-- Testear el código para preprocesar una muestra nueva.
-- Probar la MLP con distintos parámetros.
+- Probar combinaciones de hiperparámetros y features para catboot/xgboost
 - Ejercicio extra.
 - Informe
 - Poster
