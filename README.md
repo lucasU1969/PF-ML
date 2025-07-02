@@ -11,7 +11,12 @@
 
 
 #### To-Do
-- Probar combinaciones de hiperparámetros y features para catboot/xgboost
+- Gráfico del error por marca. 
+- Gráfico de feature importance.
+- Curva de depreciación promedio por marca. 
+- error en función de los kilómetros. 
+- error en función del año. 
+- Gráfico predicción vs real.
 - Ejercicio extra.
 - Informe
 - Poster

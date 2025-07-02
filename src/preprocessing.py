@@ -24,7 +24,8 @@ class Preprocessor:
     def __init__(self, raw_train_df: pd.DataFrame):
         """
         """
-        self.train_df = raw_train_df.drop(columns=['Unnamed: 0']).copy()
+        self.raw_train_df = raw_train_df.copy()
+        self.train_df = self.raw_train_df.drop(columns=['Unnamed: 0'])
 
         self.train_df['LitrosMotor'] = self.train_df['Motor'].apply(extract_l_motor)
         self.train_df['LitrosMotor_extraido_de_Titulo'] = 0
@@ -69,8 +70,9 @@ class Preprocessor:
     def version(self, test_df:pd.DataFrame) -> pd.DataFrame: 
         """
         """
-        if 'Versión' in test_df.columns: 
-            test_df.drop(columns=['Versión'], inplace=True)
+        test_df['Caracteres_version'] = test_df['Versión'].apply(lambda x: len(str(x)))
+        # if 'Versión' in test_df.columns: 
+        #     test_df.drop(columns=['Versión'], inplace=True)
         return test_df
     
     def color(self, test_df:pd.DataFrame, known_colors: list[str]=KNOWN_COLORS) -> pd.DataFrame:
@@ -155,8 +157,9 @@ class Preprocessor:
     def titulo(self, test_df:pd.DataFrame) -> pd.DataFrame:
         """
         """
-        if 'Título' in test_df.columns:
-            test_df.drop(columns=['Título'], inplace=True)
+        test_df['Caracteres_titulo'] = test_df['Título'].apply(lambda x: len(str(x)))
+        # if 'Título' in test_df.columns:
+        #     test_df.drop(columns=['Título'], inplace=True)
         return test_df
     
     def precio(self, test_df:pd.DataFrame) -> pd.DataFrame:
@@ -174,8 +177,8 @@ class Preprocessor:
         """
         """
         test_df['Caracteres_descripcion'] = test_df['Descripción'].apply(lambda x: len(str(x)))
-        if drop:
-            test_df.drop(columns=['Descripción'], inplace=True)
+        # if drop:
+        #     test_df.drop(columns=['Descripción'], inplace=True)
         return test_df
     
     def tipo_de_vendedor(self, test_df:pd.DataFrame, known_sellers:list[str]=KNOWN_SELLERS) -> pd.DataFrame:
